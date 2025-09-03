@@ -27,8 +27,8 @@ public class Button : MonoBehaviour
 
             if(Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(box.transform.position.x, box.transform.position.z)) < minimumDistance)
             {
-                currentWeight = box.weight;
-
+                currentWeight = box.Weight;
+                //Debug.Log(currentWeight);
                 if (!weighed)
                 {
                     weighed = true;

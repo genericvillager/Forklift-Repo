@@ -75,9 +75,31 @@ public class PlayerMovement : MonoBehaviour
     {
 
         lift = !lift;
-
+        if(grabber.boxHeld)
+        {
+            if(lift)
+            {
+                grabber.curBox.Lift();
+            }
+            else
+            {
+                grabber.curBox.Lower();
+            }
+        }
         anim.SetBool("LiftUp", lift);
 
     }
 
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.rigidbody!=null && collision.rigidbody.gameObject.TryGetComponent<Box>(out Box b) && !b.playerPushable)
+        {
+            collision.rigidbody.velocity = new Vector3(0,collision.rigidbody.velocity.y,0);
+            /*
+            collision.rigidbody.AddForce(body.velocity * body.mass * b.playerCoefficientOfRestitution);
+            body.AddForce(-body.velocity * body.mass * b.playerCoefficientOfRestitution);
+            */
+        }
+    }
 }
